@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fraud Detection Prediction</h1>
+        <form id="prediction-form">
+            <div class="input-group">
+                <label for="step">Step (1 hour = 1 step):</label>
+                <input type="number" id="step" name="step" required>
+            </div>
+            <div class="input-group">
+                <label for="type">Transaction Type:</label>
+                <select id="type" name="type" required>
+                    <option value="CASH_OUT">CASH_OUT</option>
+                    <option value="PAYMENT">PAYMENT</option>
+                    <option value="CASH_IN">CASH_IN</option>
+                    <option value="TRANSFER">TRANSFER</option>
+                    <option value="DEBIT">DEBIT</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+            </div>
+            <div class="input-group">
+                <label for="oldbalanceOrg">Old Balance (Sender):</label>
+                <input type="number" id="oldbalanceOrg" name="oldbalanceOrg" required>
+            </div>
+            <div class="input-group">
+                <label for="oldbalanceDest">Old Balance (Receiver):</label>
+                <input type="number" id="oldbalanceDest" name="oldbalanceDest" required>
+            </div>
+            <button type="submit" id="predict-btn">Predict</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Prediction: <span id="prediction"></span></h3>
+            <p>Prediction Probability: <span id="prediction-score"></span></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#prediction-form").submit(function (e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/predict",
+                    data: formData,
+                    success: function (response) {
+                        $('#prediction').text(response.prediction);
+                        $('#prediction-score').text(response.prediction_score);
+                        $('#result').show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
