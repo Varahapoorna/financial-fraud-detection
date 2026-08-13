@@ -1,0 +1,13 @@
+Flask
+pandas
+scikit-learn
+openpyxl
+numpy
+Werkzeug
+Jinja2
+itsdangerous
+click
+python-dateutil
+pytz
+six
+joblib
