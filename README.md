@@ -1,4 +1,5 @@
 # Financial Fraud Detection System
+
 ## Project Description
 
 Financial Fraud Detection System is a machine learning-based web application that detects potentially fraudulent financial transactions.
@@ -44,3 +45,20 @@ financial-fraud-detection/
 ├── static/
 │   └── style.css
 └── ui images/
+```
+## How to Run
+
+1. Install the required Python libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Run the Flask application:
+
+```bash
+python app.py
+```
+## Note
+
+The trained model file and sensitive configuration files are not included in this public repository.
